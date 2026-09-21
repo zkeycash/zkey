@@ -2,7 +2,7 @@
 
 Open-source package for **ZKEY → KEY → private ZEC**.
 
-Burn `$ZKEY` on Solana to mint fungible **KEY**, then burn KEY to redeem private **ZEC** to a shielded address. `site/` is the Lovable / TanStack Start app. `ops/` covers KEY mint creation and ZEC treasury payouts.
+Burn `$ZKEY` on Solana to mint fungible **KEY**, then burn KEY to redeem private **ZEC** to a shielded address. `site/` is the TanStack Start frontend. `ops/` covers KEY mint creation and ZEC treasury payouts.
 
 ## Architecture (short)
 
@@ -41,7 +41,7 @@ Solscan: [KEY](https://solscan.io/token/6KnZsn8Ej9w7LuyGm9y1eA4Q8T6VSoKBLPSSgq6v
 
 ```
 zkey-oss/
-  site/             # Lovable / TanStack Start app
+  site/             # TanStack Start frontend
   ops/              # Mint scripts + ZEC payout tooling
   README.md
   ARCHITECTURE.md

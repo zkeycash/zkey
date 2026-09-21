@@ -250,7 +250,7 @@ function ZkeyApp() {
 
     if (!res.ok) {
       if (res.code === 'mint_authority_not_configured') {
-        toast.error('Mint authority not configured — add KEY_MINT_AUTHORITY_JSON in Lovable secrets')
+        toast.error('Mint authority not configured — add KEY_MINT_AUTHORITY_JSON in server environment variables')
       } else if (res.code === 'confirm_timeout' && res.signature) {
         const sig = res.signature
         toast('Sent — still confirming on-chain', {

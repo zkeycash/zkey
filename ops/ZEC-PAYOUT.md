@@ -28,7 +28,7 @@ Treasury transparent address: `t1YmzzPRrdCeCniYm1naneUozLhoWf5shWi` (BIP44 `m/44
 2. `sync run` against lightwalletd
 3. If transparent > 0: `quickshield`, wait until `spendable_balance` > 0
 4. `quicksend <zs1> <zat> "<memo>"` → capture real txid
-5. Update Lovable / DB only after broadcast: set `status='fulfilled'`, `zec_txid=<txid>`
+5. Update the app database only after broadcast: set `status='fulfilled'`, `zec_txid=<txid>`
 
 ## Amount
 
