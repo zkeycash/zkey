@@ -29,7 +29,7 @@ See [ARCHITECTURE.md](./ARCHITECTURE.md) for Mermaid flow diagrams.
 
 | What | Address |
 |---|---|
-| **$ZKEY mint** | `2QjuLTP2BqEZozJagNQazSTB3LsZ6mhkijHiQ5vGLkUw` |
+| **$ZKEY mint** | `` |
 | **KEY mint** (fungible, decimals 0) | `6KnZsn8Ej9w7LuyGm9y1eA4Q8T6VSoKBLPSSgq6vjVcx` |
 | **KEY collection** (legacy NFT era) | `63auqENdyHBqshgfJ3pEfXQgHR6UXiHWhcDoLfVxcbg5` |
 | **Mint authority** (pubkey only) | `4iYg5WpaWyjSJLg5gGPNaKmFwj78JS1sLxNunCboS1nW` |
