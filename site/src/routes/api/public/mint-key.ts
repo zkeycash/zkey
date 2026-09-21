@@ -7,11 +7,11 @@ import { createFileRoute } from '@tanstack/react-router'
 // SECURITY: KEY_MINT_AUTHORITY_JSON (raw 64-byte keypair JSON array) is read
 // inside the handler only. Never logged, never returned, never VITE_-prefixed.
 
-const ZKEY_MINT = '2QjuLTP2BqEZozJagNQazSTB3LsZ6mhkijHiQ5vGLkUw'
+const ZKEY_MINT = '' // YOUR_ZKEY_MINT
 const ZKEY_DECIMALS = 6
 /** Fungible KEY pool mint (decimals 0, classic SPL Token program). */
 const KEY_MINT = '6KnZsn8Ej9w7LuyGm9y1eA4Q8T6VSoKBLPSSgq6vjVcx'
-const BURN_PROD = 1_000_000
+const BURN_PROD = 250_000
 const BURN_TEST = 10_000
 const MAX_KEYS = 100
 const BASE58 = /^[1-9A-HJ-NP-Za-km-z]{32,44}$/

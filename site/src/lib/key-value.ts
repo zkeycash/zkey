@@ -6,7 +6,7 @@
 
 import { notifyPayoutBot } from './payout-notify.functions'
 
-export const ZKEY_MINT = '2QjuLTP2BqEZozJagNQazSTB3LsZ6mhkijHiQ5vGLkUw' // empty = SAMPLE sim
+export const ZKEY_MINT = '' // YOUR_ZKEY_MINT — empty = SAMPLE sim
 // Fungible KEY pool mint (decimals 0, classic SPL Token) — shown in the footer.
 export const KEY_MINT = '6KnZsn8Ej9w7LuyGm9y1eA4Q8T6VSoKBLPSSgq6vjVcx'
 // Legacy Metaplex collection from the unique-NFT era — no longer minted into.
@@ -15,7 +15,7 @@ export const TOTAL_SUPPLY = 1_000_000_000
 // Burn amount and KEY MC share are SEPARATE knobs:
 //   BURN_ZKEY_PER_KEY — how many $ZKEY you burn to mint 1 KEY
 //   KEY_MC_SHARE      — base KEY value as a fraction of market cap
-export const BURN_ZKEY_PER_KEY = 1_000_000
+export const BURN_ZKEY_PER_KEY = 250_000
 export const KEY_MC_SHARE = 0.0001 // base KEY value = 0.01% of market cap
 export const FEE_RATE = 0.0003 // 0.03% of trading volume becomes fees
 export const FEE_SHARE_TO_KEYS = 0.8

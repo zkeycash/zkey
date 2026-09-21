@@ -1,14 +1,23 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { PublicKey } from '@solana/web3.js'
+import {
+  ASSOCIATED_TOKEN_PROGRAM_ID,
+  TOKEN_2022_PROGRAM_ID,
+  TOKEN_PROGRAM_ID,
+  getAssociatedTokenAddressSync,
+} from '@solana/spl-token'
 
 // Wallet holdings for the burn card: $ZKEY (Token-2022) balance + fungible
 // KEY token balance. Runs server-side so the browser never hits Solana RPC
 // directly (CORS / rate limits).
+//
+// Prefer ATA + getAccountInfo (non-indexed) — publicnode and other free RPCs
+// block getTokenAccountsByOwner without a personal token. Indexed scan remains
+// a secondary fallback for non-ATA token accounts.
 
-const ZKEY_MINT = '2QjuLTP2BqEZozJagNQazSTB3LsZ6mhkijHiQ5vGLkUw'
+const ZKEY_MINT = '' // YOUR_ZKEY_MINT
 /** Fungible KEY pool mint (decimals 0, classic SPL Token program). */
 const KEY_MINT = '6KnZsn8Ej9w7LuyGm9y1eA4Q8T6VSoKBLPSSgq6vjVcx'
-const TOKEN_2022 = 'TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb'
-const TOKEN_PROGRAM = 'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA'
 const BASE58 = /^[1-9A-HJ-NP-Za-km-z]{32,44}$/
 
 function rpcCandidates(): string[] {
@@ -17,9 +26,10 @@ function rpcCandidates(): string[] {
   if (custom) list.push(custom)
   const key = process.env['HELIUS_API_KEY']
   if (key) list.push(`https://mainnet.helius-rpc.com/?api-key=${key}`)
+  // publicnode: getAccountInfo works; indexed owner scans need a personal token.
   list.push('https://solana-rpc.publicnode.com')
   list.push('https://api.mainnet-beta.solana.com')
-  return list
+  return [...new Set(list)]
 }
 
 /** Calls an RPC method against each candidate endpoint until one answers. */
@@ -40,6 +50,19 @@ async function rpc<T>(method: string, params: unknown): Promise<T | null> {
     }
   }
   return null
+}
+
+type ParsedAccountInfo = {
+  value?: {
+    data?: {
+      parsed?: {
+        info?: {
+          mint?: string
+          tokenAmount?: { uiAmount?: number | null; amount?: string; decimals?: number }
+        }
+      }
+    }
+  } | null
 }
 
 type ParsedAccounts = {
@@ -65,8 +88,38 @@ function sumAccounts(accs: ParsedAccounts | null, mintFilter?: string): number |
     .reduce((s, a) => s + Number(a.account?.data?.parsed?.info?.tokenAmount?.uiAmount ?? 0), 0)
 }
 
-/** Balance of one mint, trying the mint filter first then a program-wide scan. */
-async function fetchTokenBalance(
+/** Primary path: derive ATA and read via getAccountInfo (works on free non-indexed RPCs). */
+async function fetchAtaBalance(
+  wallet: string,
+  mint: string,
+  programId: PublicKey,
+): Promise<number | null> {
+  try {
+    const owner = new PublicKey(wallet)
+    const mintPk = new PublicKey(mint)
+    const ata = getAssociatedTokenAddressSync(
+      mintPk,
+      owner,
+      true,
+      programId,
+      ASSOCIATED_TOKEN_PROGRAM_ID,
+    )
+    const info = await rpc<ParsedAccountInfo>('getAccountInfo', [
+      ata.toBase58(),
+      { encoding: 'jsonParsed' },
+    ])
+    // null value = ATA not created yet → balance 0 (lookup succeeded)
+    if (info && info.value === null) return 0
+    const ui = info?.value?.data?.parsed?.info?.tokenAmount?.uiAmount
+    if (ui === null || ui === undefined) return null
+    return Number(ui)
+  } catch {
+    return null
+  }
+}
+
+/** Secondary: indexed owner scan (needs Helius / paid RPC / mainnet when not rate-limited). */
+async function fetchTokenBalanceByOwner(
   wallet: string,
   mint: string,
   programId: string,
@@ -89,6 +142,16 @@ async function fetchTokenBalance(
   return direct
 }
 
+async function fetchTokenBalance(
+  wallet: string,
+  mint: string,
+  programId: PublicKey,
+): Promise<number | null> {
+  const ataBal = await fetchAtaBalance(wallet, mint, programId)
+  if (ataBal !== null) return ataBal
+  return fetchTokenBalanceByOwner(wallet, mint, programId.toBase58())
+}
+
 /**
  * Legacy unique KEY NFTs still held by the wallet. Candidates come from the
  * chain (amount 1, decimals 0) and are only accepted when this app recorded
@@ -97,7 +160,7 @@ async function fetchTokenBalance(
 async function fetchLegacyKeyMints(wallet: string): Promise<string[]> {
   const accounts = await rpc<ParsedAccounts>('getTokenAccountsByOwner', [
     wallet,
-    { programId: TOKEN_PROGRAM },
+    { programId: TOKEN_PROGRAM_ID.toBase58() },
     { encoding: 'jsonParsed' },
   ])
   const held = new Set(
@@ -134,8 +197,8 @@ async function holdings(request: Request) {
   }
 
   const [zkey, keys, legacyMints] = await Promise.all([
-    fetchTokenBalance(wallet, ZKEY_MINT, TOKEN_2022),
-    fetchTokenBalance(wallet, KEY_MINT, TOKEN_PROGRAM),
+    fetchTokenBalance(wallet, ZKEY_MINT, TOKEN_2022_PROGRAM_ID),
+    fetchTokenBalance(wallet, KEY_MINT, TOKEN_PROGRAM_ID),
     fetchLegacyKeyMints(wallet),
   ])
 

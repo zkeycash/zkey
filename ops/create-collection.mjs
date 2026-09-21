@@ -54,11 +54,11 @@ const meta = {
   name: 'ZKEY KEYS',
   symbol: 'KEY',
   description:
-    'ZKEY KEY collection. Burn 1,000,000 $ZKEY for 1 KEY. Base value = 0.01% of MC + 80% of (0.03% volume fees) ÷ keys. Redeem for private ZEC.',
+    'ZKEY KEY collection. Burn 250,000 $ZKEY for 1 KEY. Base value = 0.01% of MC + 80% of (0.03% volume fees) ÷ keys. Redeem for private ZEC.',
   image: process.env.KEY_COLLECTION_IMAGE || 'https://zkey.cash/favicon.ico',
   external_url: process.env.KEY_EXTERNAL_URL || 'https://zkey.cash',
   attributes: [
-    { trait_type: 'burn_amount', value: '1000000' },
+    { trait_type: 'burn_amount', value: '250000' },
     { trait_type: 'mc_share', value: '0.01%' },
     { trait_type: 'fee_rate', value: '0.03%' },
   ],

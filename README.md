@@ -19,7 +19,7 @@ See [ARCHITECTURE.md](./ARCHITECTURE.md) for Mermaid flow diagrams.
 
 | Parameter | Value |
 |---|---|
-| Burn rate | **1,000,000 $ZKEY → 1 KEY** |
+| Burn rate | **250,000 $ZKEY → 1 KEY** |
 | Base KEY value | **0.01% of $ZKEY market cap** (`KEY_MC_SHARE = 0.0001`, independent of burn amount) |
 | Fee rate | **0.03%** of trading volume (`FEE_RATE = 0.0003`) |
 | Fee share to KEY holders | **80%** of fees (`FEE_SHARE_TO_KEYS = 0.8`), split across outstanding KEY |
@@ -29,7 +29,7 @@ See [ARCHITECTURE.md](./ARCHITECTURE.md) for Mermaid flow diagrams.
 
 | What | Address |
 |---|---|
-| **$ZKEY mint** | `` |
+| **$ZKEY mint** | `YOUR_ZKEY_MINT` |
 | **KEY mint** (fungible, decimals 0) | `6KnZsn8Ej9w7LuyGm9y1eA4Q8T6VSoKBLPSSgq6vjVcx` |
 | **KEY collection** (legacy NFT era) | `63auqENdyHBqshgfJ3pEfXQgHR6UXiHWhcDoLfVxcbg5` |
 | **Mint authority** (pubkey only) | `4iYg5WpaWyjSJLg5gGPNaKmFwj78JS1sLxNunCboS1nW` |

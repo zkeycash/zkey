@@ -57,7 +57,7 @@ const PENDING_MINT = ZKEY_MINT
 type Step = 'burn' | 'mint'
 
 // KEY economics model (shared math lives in @/lib/key-value):
-//   BURN_ZKEY_PER_KEY = 1,000,000 $ZKEY burned to mint 1 KEY
+//   BURN_ZKEY_PER_KEY = 250,000 $ZKEY burned to mint 1 KEY
 //   baseKeySol   = mcSol * KEY_MC_SHARE (0.01% of MC — NOT tied to burn amount)
 //   feesGenerated = volumeUsd * FEE_RATE (0.03%); feesToKeys = feesGenerated * 80%
 //   feePerKeySol = (feesToKeysSol) / max(keysOutstanding, 1)

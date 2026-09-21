@@ -10,7 +10,7 @@ export const Route = createFileRoute('/docs')({
       {
         name: 'description',
         content:
-          'Burn 1,000,000 $ZKEY for a Solana KEY, burn the KEY, and receive its value in private ZEC. How the ZKEY burn works and why it stays private.',
+          'Burn 250,000 $ZKEY for a Solana KEY, burn the KEY, and receive its value in private ZEC. How the ZKEY burn works and why it stays private.',
       },
       { property: 'og:type', content: 'website' },
       { property: 'og:title', content: 'A fully private way to receive ZEC — ZKEY' },
@@ -35,7 +35,7 @@ const STEPS = [
   {
     n: '1',
     title: 'Burn $ZKEY',
-    body: 'Burn 1,000,000 $ZKEY → receive 1 Solana KEY (NFT).',
+    body: 'Burn 250,000 $ZKEY → receive 1 Solana KEY (NFT).',
   },
   {
     n: '2',
@@ -119,7 +119,7 @@ function DocsPage() {
               <span className="mt-[9px] size-1.5 shrink-0 rounded-full bg-[#F4B728]" />
               <span>
                 <span className="font-semibold text-foreground">Base:</span> 0.01% of market cap
-                (set independently of the 1,000,000 tokens you burned)
+                (set independently of the 250,000 tokens you burned)
               </span>
             </li>
             <li className="flex gap-2">
@@ -132,7 +132,7 @@ function DocsPage() {
             </li>
           </ul>
           <p className="mt-4 font-mono text-xs text-[#7a6420]/85">
-            Burn 1,000,000 $ZKEY → 1 KEY · value = 0.01% of MC + 80% of (0.03% vol fees) ÷ keys
+            Burn 250,000 $ZKEY → 1 KEY · value = 0.01% of MC + 80% of (0.03% vol fees) ÷ keys
           </p>
         </section>
 

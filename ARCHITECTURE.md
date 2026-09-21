@@ -40,7 +40,7 @@ sequenceDiagram
   S->>DB: key_mints status = minted
 ```
 
-- Burn amount: `keys × 1_000_000` $ZKEY (prod) or `keys × 10_000` (test).
+- Burn amount: `keys × 250_000` $ZKEY (prod) or `keys × 10_000` (test).
 - KEY mint authority secret never leaves the server.
 
 ## Step 2 — Burn KEY → queue ZEC redeem
