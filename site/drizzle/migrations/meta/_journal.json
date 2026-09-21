@@ -1,0 +1,41 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1789951060415,
+      "tag": "0000_key_metrics_and_redeem_requests",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1789951766601,
+      "tag": "0001_create_key_mints",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1789951966374,
+      "tag": "0002_key_metrics_volume_fields",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1789952368291,
+      "tag": "0003_keys_outstanding_autoupdate",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1789954326271,
+      "tag": "0004_redeem_requests_source_tag",
+      "breakpoints": true
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Key material — NEVER commit
+key-mint-authority.json
+**/key-mint-authority.json
+authority.json
+**/authority.json
+*-authority.json
+*authority*.json
+!*authority.pubkey.txt
+!*pubkey.txt
+*-key.txt
+*-keys.txt
+*secret*
+*mnemonic*
+*Mnemonic*
+*.wif
+*.WIF
+WIF*
+wallet.dat
+**/wallet.dat
+zingo-wallet.dat
+**/zingo-wallet.dat
+*.dat
+*.pem
+*.p12
+id_rsa*
+*.key
+!*.pubkey.txt
+
+# Keep public mint metadata JSON (addresses only)
+!ops/fungible-key-mint.json
+!ops/collection-mint.json
+!ops/package.json
+!**/package.json
+!**/tsconfig.json
+!**/components.json
+!**/drizzle.config.ts
+!site/drizzle/migrations/meta/**
+
+# ZEC / zingo local wallet state
+zec-payout-wallet/
+**/zec-payout-wallet/
+zcash-params/
+.zingo*/
+**/zec-treasury-key.txt
+**/dav-shielded-zec-key.txt
+
+# Build
+dist/
+dist-ssr/
+.output/
+.vinxi/
+.tanstack/
+.nitro/
+.wrangler/
+.dev.vars
+*.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Scratch
+_mcp_raw/
+_filelist.json
+*.bak
+*.tmp

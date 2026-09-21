@@ -1,0 +1,21 @@
+{
+  "name": "zkey-ops",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "ZKEY ops scripts — mint KEY collection / fungible KEY; ZEC payout tooling lives in send-zec-payout.sh",
+  "scripts": {
+    "create-fungible-key": "node create-fungible-key.mjs",
+    "create-collection": "node create-collection.mjs"
+  },
+  "dependencies": {
+    "@metaplex-foundation/mpl-token-metadata": "^3.4.0",
+    "@metaplex-foundation/umi": "^1.6.0",
+    "@metaplex-foundation/umi-bundle-defaults": "^1.6.0",
+    "@metaplex-foundation/umi-signer-wallet-adapters": "^1.6.0",
+    "@metaplex-foundation/umi-web3js-adapters": "^1.6.0",
+    "@solana/spl-token": "^0.4.15",
+    "@solana/web3.js": "^1.99.0",
+    "bs58": "^6.0.0"
+  }
+}
